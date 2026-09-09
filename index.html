@@ -3,619 +3,438 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Awong Suites — Fashion E-Commerce</title>
-  <meta name="description" content="Awong Suites - Modern premium fashion e-commerce single file HTML." />
+  <title>OST Jurnalistik</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
     :root {
-      --bg: #fcfcfc;
-      --card: #ffffff;
-      --text: #111111;
-      --muted: #666;
-      --line: #e8e8e8;
-      --accent: #2a6ef2;
-      --radius: 14px;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --brand-primary: #f08f19;
+      --brand-secondary: #f27825;
     }
-    .dark {
-      --bg: #0d0d0d;
-      --card: #161616;
-      --text: #f7f7f7;
-      --muted: #b5b5b5;
-      --line: #2b2b2b;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+    .brand-gradient {
+      background: linear-gradient(120deg, var(--brand-primary), var(--brand-secondary));
     }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background: var(--bg); color: var(--text); scroll-behavior:smooth; }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display:block; }
-    .container { width:min(1200px, 92vw); margin-inline:auto; }
-    .topbar { background:#111; color:#fff; font-size:12px; text-align:center; padding:8px 12px; }
-    .header { position:sticky; top:0; z-index:50; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); border-bottom:1px solid var(--line); }
-    .nav { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0; }
-    .logo { font-weight:800; letter-spacing:.4px; }
-    .menu { display:flex; gap:18px; font-size:14px; color:var(--muted); }
-    .menu a:hover { color:var(--text); }
-    .actions { display:flex; gap:8px; align-items:center; }
-    .btn, button { border:0; background:var(--text); color:var(--bg); padding:10px 14px; border-radius:999px; cursor:pointer; font-weight:600; }
-    .btn-outline { background:transparent; border:1px solid var(--line); color:var(--text); }
-    .icon-btn { width:38px; height:38px; border-radius:999px; border:1px solid var(--line); display:grid; place-items:center; background:var(--card); color:var(--text); }
-    .hero { margin:22px 0 44px; display:grid; grid-template-columns:1.1fr .9fr; gap:18px; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow: var(--shadow); }
-    .hero-copy { padding:34px; display:flex; flex-direction:column; justify-content:center; }
-    .eyebrow { text-transform:uppercase; letter-spacing:.14em; font-size:11px; color:var(--muted); }
-    h1 { font-size:clamp(32px, 6vw, 62px); line-height:1.03; margin:.4rem 0 .9rem; }
-    .muted { color:var(--muted); }
-    .cta { display:flex; gap:10px; flex-wrap:wrap; }
-    .hero-image { border-radius:var(--radius); overflow:hidden; min-height:420px; }
-    .hero-image img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
-    .hero-image:hover img { transform:scale(1.04); }
 
-    section { margin:44px 0; }
-    .section-head { display:flex; align-items:end; justify-content:space-between; gap:12px; margin-bottom:16px; }
-    .section-head h2 { margin:0; font-size:clamp(22px,3vw,32px); }
-    .chips { display:flex; gap:8px; flex-wrap:wrap; }
-    .chip { border:1px solid var(--line); background:var(--card); border-radius:999px; padding:7px 11px; font-size:12px; }
-
-    .grid { display:grid; gap:14px; }
-    .grid.cols-4 { grid-template-columns:repeat(4, minmax(0,1fr)); }
-    .grid.cols-3 { grid-template-columns:repeat(3, minmax(0,1fr)); }
-    .grid.cols-2 { grid-template-columns:repeat(2, minmax(0,1fr)); }
-
-    .product { border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--card); transition:.2s; }
-    .product:hover { transform:translateY(-2px); box-shadow:var(--shadow); }
-    .p-media { aspect-ratio: 3/4; position:relative; overflow:hidden; }
-    .p-media img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .35s, transform .5s; }
-    .p-media img:nth-child(2) { opacity:0; }
-    .product:hover .p-media img:nth-child(1){ opacity:0; }
-    .product:hover .p-media img:nth-child(2){ opacity:1; }
-    .badge-wrap { position:absolute; top:8px; left:8px; display:flex; gap:5px; flex-wrap:wrap; }
-    .badge { font-size:10px; font-weight:700; padding:4px 7px; border-radius:999px; color:#fff; background:#111; }
-    .badge.sale { background:#d72a2a; } .badge.best { background:#2a6ef2; } .badge.limited { background:#b76a1e; }
-    .wish { position:absolute; right:8px; top:8px; }
-    .wish button { width:34px; height:34px; border-radius:999px; border:1px solid var(--line); background:#fff; color:#111; }
-    .p-body { padding:12px; }
-    .p-name { font-size:14px; font-weight:700; margin:0 0 2px; }
-    .p-meta { font-size:12px; color:var(--muted); }
-    .price { display:flex; align-items:center; gap:8px; margin-top:7px; font-size:14px; }
-    .old { color:var(--muted); text-decoration:line-through; font-size:12px; }
-    .swatches { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
-    .swatches span { border:1px solid var(--line); border-radius:999px; font-size:10px; padding:2px 8px; color:var(--muted); }
-    .p-actions { margin-top:10px; display:grid; grid-template-columns:1fr 1fr; gap:7px; }
-    .p-actions button { padding:8px; border-radius:999px; font-size:12px; }
-
-    .shop-wrap { display:grid; grid-template-columns:260px 1fr; gap:14px; }
-    .filter { border:1px solid var(--line); border-radius:16px; background:var(--card); padding:14px; position:sticky; top:86px; height:max-content; }
-    .filter h3 { margin:0 0 10px; font-size:14px; }
-    .field { margin-bottom:10px; }
-    .field label { display:block; font-size:12px; color:var(--muted); margin-bottom:6px; }
-    input, select, textarea { width:100%; border:1px solid var(--line); background:transparent; color:var(--text); border-radius:11px; padding:9px 10px; font:inherit; }
-
-    .mini-banner { padding:20px; background:#111; color:#fff; border-radius:18px; display:grid; grid-template-columns:1fr .9fr; gap:12px; align-items:center; }
-    .mini-banner img { border-radius:12px; height:190px; width:100%; object-fit:cover; }
-
-    .panel { border:1px solid var(--line); border-radius:16px; background:var(--card); padding:16px; }
-
-    .blog-card img { aspect-ratio:16/10; object-fit:cover; border-radius:12px; }
-    .blog-card { border:1px solid var(--line); border-radius:16px; background:var(--card); padding:12px; }
-
-    .footer { margin-top:60px; border-top:1px solid var(--line); background:color-mix(in srgb, var(--card) 80%, transparent); }
-    .footer-grid { padding:34px 0; display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
-    .footer h4 { margin:0 0 10px; font-size:13px; }
-    .footer a, .footer p { color:var(--muted); font-size:13px; display:block; margin:6px 0; }
-    .copyright { border-top:1px solid var(--line); padding:14px 0; text-align:center; color:var(--muted); font-size:12px; }
-
-    .drawer, .ai-panel { position:fixed; inset:0; background:rgba(0,0,0,.42); z-index:70; display:none; }
-    .drawer.open, .ai-panel.open { display:block; }
-    .drawer-box { position:absolute; right:0; top:0; height:100%; width:min(430px, 100%); background:var(--card); border-left:1px solid var(--line); padding:14px; overflow:auto; }
-
-    .ai-float { position:fixed; right:18px; bottom:18px; width:56px; height:56px; border-radius:999px; display:grid; place-items:center; background:var(--accent); color:#fff; border:0; z-index:90; box-shadow:var(--shadow); }
-    .ai-box { position:absolute; right:18px; bottom:84px; width:min(420px, 95vw); height:70vh; background:var(--card); border:1px solid var(--line); border-radius:18px; display:flex; flex-direction:column; overflow:hidden; }
-    .ai-head { padding:12px; border-bottom:1px solid var(--line); font-weight:700; display:flex; justify-content:space-between; }
-    .ai-msgs { padding:12px; overflow:auto; flex:1; display:flex; flex-direction:column; gap:10px; background:color-mix(in srgb, var(--bg) 95%, transparent); }
-    .msg { max-width:86%; padding:10px 12px; border-radius:13px; font-size:13px; line-height:1.45; }
-    .msg.user { align-self:flex-end; background:#111; color:#fff; }
-    .msg.bot { align-self:flex-start; background:var(--card); border:1px solid var(--line); }
-    .ai-input { padding:10px; border-top:1px solid var(--line); display:flex; gap:8px; }
-
-    .mobile-menu { display:none; }
-
-    @media (max-width: 980px){
-      .menu { display:none; }
-      .mobile-menu { display:inline-grid; }
-      .hero { grid-template-columns:1fr; }
-      .grid.cols-4 { grid-template-columns:repeat(3,minmax(0,1fr)); }
-      .shop-wrap { grid-template-columns:1fr; }
-      .filter { position:static; }
-      .footer-grid { grid-template-columns:repeat(2,1fr); }
-      .mini-banner { grid-template-columns:1fr; }
+    .slider-image {
+      opacity: 0;
+      transform: scale(1.03);
+      transition: opacity 900ms ease, transform 4500ms ease;
     }
-    @media (max-width: 680px){
-      .grid.cols-4, .grid.cols-3 { grid-template-columns:repeat(2,minmax(0,1fr)); }
-      .actions .search { display:none; }
-      .footer-grid { grid-template-columns:1fr; }
+
+    .slider-image.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .dot.active {
+      width: 1.5rem;
+      background-color: white;
+    }
+
+    .float-soft {
+      animation: floatSoft 4s ease-in-out infinite;
+    }
+
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
-<body>
-  <div class="topbar">FREE SHIPPING untuk pembelian di atas Rp500.000 • GRATIS PENUKARAN SIZE • MEMBER DAPATKAN EXTRA BENEFIT</div>
-
-  <header class="header">
-    <div class="container nav">
-      <div style="display:flex;align-items:center;gap:10px">
-        <button class="icon-btn mobile-menu" id="openMobile">☰</button>
-        <a href="#home" class="logo">AWONG SUITES</a>
+<body class="bg-white text-slate-800">
+  <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-sm border-b border-slate-200">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-3">
+        <img src="namalogo.png" alt="Logo OST Jurnalistik" class="h-11 w-11 object-contain" />
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Ekstrakurikuler Sekolah</p>
+          <h1 class="text-lg font-bold text-slate-900">OST Jurnalistik</h1>
+        </div>
       </div>
-      <nav class="menu">
-        <a href="#home">Home</a>
-        <a href="#shop">Shop</a>
-        <a href="#men">Men</a>
-        <a href="#women">Women</a>
-        <a href="#kids">Kids</a>
-        <a href="#new">New Arrivals</a>
-        <a href="#best">Best Sellers</a>
-        <a href="#sale">Sale</a>
-        <a href="#blog">Blog</a>
-      </nav>
-      <div class="actions">
-        <input class="search" id="searchInput" placeholder="Search" style="width:170px;border-radius:999px"/>
-        <button class="icon-btn" id="themeBtn">◐</button>
-        <button class="icon-btn" id="openWishlist">♡</button>
-        <button class="icon-btn" id="openCart">🛍</button>
+
+      <div class="relative">
+        <button id="menu-btn" type="button" class="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:border-slate-400" aria-label="Buka menu" aria-expanded="false" aria-controls="menu-panel">
+          <span class="sr-only">Buka menu</span>
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round">
+            <path d="M4 7h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 17h16"></path>
+          </svg>
+        </button>
+
+        <nav id="menu-panel" class="absolute right-0 top-14 hidden min-w-52 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
+          <a href="#alasan" class="menu-link block px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">Alasan Join</a>
+          <a href="#karya" class="menu-link block px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">Karya Kami</a>
+          <a href="#angka" class="menu-link block px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">Pencapaian</a>
+          <a href="#program" class="menu-link block px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">Program</a>
+          <a href="#emagazine" class="menu-link block px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">E-Magazine</a>
+          <a href="#flyer" class="menu-link block px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">Flyer</a>
+          <a href="#kontak" class="menu-link block px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100">Kontak</a>
+        </nav>
       </div>
     </div>
   </header>
 
-  <main class="container" id="home">
-    <section class="hero">
-      <div class="card hero-copy">
-        <div class="eyebrow">Awong Suites 2026 Collection</div>
-        <h1>WEAR YOUR STORY.</h1>
-        <p class="muted">Temukan koleksi fashion yang dirancang untuk membuat setiap penampilan terasa lebih percaya diri.</p>
-        <div class="cta" style="margin-top:12px">
-          <a class="btn" href="#shop">Belanja Sekarang</a>
-          <a class="btn btn-outline" href="#new">Jelajahi Koleksi</a>
+  <main>
+    <section class="relative h-[72vh] min-h-[460px] w-full overflow-hidden">
+      <div id="banner-slider" class="relative h-full w-full" data-slider>
+        <img src="banner.png" alt="Banner OST Jurnalistik 1" class="slider-image active absolute inset-0 h-full w-full object-cover" />
+        <img src="banner2.png" alt="Banner OST Jurnalistik 2" class="slider-image absolute inset-0 h-full w-full object-cover" />
+      </div>
+
+      <div class="absolute inset-0 bg-black/40"></div>
+
+      <div class="relative z-10 mx-auto flex h-full max-w-6xl items-end px-4 pb-14">
+        <div class="max-w-2xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-orange-200">Media | Kreativitas | Informasi</p>
+          <h2 class="mt-2 text-4xl font-black leading-tight text-white md:text-6xl">OST Jurnalistik</h2>
+          <p class="mt-4 max-w-xl text-base text-slate-100 md:text-lg">Wadah siswa untuk belajar menulis, meliput, dan memproduksi konten jurnalistik sekolah secara modern dan profesional.</p>
+          <div class="mt-6 flex gap-3">
+            <a href="#flyer" class="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100">Lihat Info Kegiatan</a>
+            <a href="#kontak" class="rounded-full border border-white/80 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">Kontak</a>
+          </div>
         </div>
       </div>
-      <div class="hero-image card">
-        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1500&q=80" alt="Fashion Hero" />
+
+      <div class="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2" data-dots-for="banner-slider"></div>
+    </section>
+
+    <section id="alasan" class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+      <div class="max-w-2xl reveal">
+        <h3 class="text-3xl font-bold text-slate-900">Alasan Join OST Jurnalistik</h3>
+        <p class="mt-3 text-slate-600">Belajar komunikasi, kepemimpinan, dan kreativitas dalam satu tempat yang aktif produksi konten sekolah.</p>
       </div>
-    </section>
 
-    <section>
-      <div class="section-head">
-        <h2>Featured Categories</h2>
-      </div>
-      <div class="chips" id="categoryChips"></div>
-    </section>
-
-    <section id="new">
-      <div class="section-head"><h2>New Arrivals</h2></div>
-      <div class="grid cols-4" id="newGrid"></div>
-    </section>
-
-    <section id="best">
-      <div class="section-head"><h2>Best Sellers</h2></div>
-      <div class="grid cols-4" id="bestGrid"></div>
-    </section>
-
-    <section>
-      <div class="mini-banner">
-        <div>
-          <div class="eyebrow" style="color:#ddd">Limited Collection</div>
-          <h3 style="margin:.4rem 0 0;font-size:30px">Essentials in Monochrome</h3>
-          <p style="color:#ddd">Siluet clean, material premium, dan cut modern untuk tampilan elevated every day.</p>
-          <a href="#sale" class="btn" style="background:#fff;color:#111">Shop Limited Drop</a>
+      <div class="mt-10 grid gap-8 md:grid-cols-2 md:items-center">
+        <div class="reveal">
+          <img src="banner2.png" alt="Aktivitas tim OST Jurnalistik" class="h-[320px] w-full rounded-2xl object-cover" />
         </div>
-        <img src="https://images.unsplash.com/photo-1503342394128-c104d54dba01?auto=format&fit=crop&w=1200&q=80" alt="Limited" />
-      </div>
-    </section>
 
-    <section id="shop">
-      <div class="section-head"><h2>Shop / Semua Produk</h2><span class="muted" id="resultCount"></span></div>
-      <div class="shop-wrap">
-        <aside class="filter">
-          <h3>Filter Produk</h3>
-          <div class="field">
-            <label>Keyword</label>
-            <input id="fQuery" placeholder="kaos oversized" />
+        <div class="relative reveal">
+          <div class="float-soft rounded-2xl border border-orange-200 bg-white p-6 shadow-xl shadow-orange-100/70">
+            <p class="text-sm font-semibold uppercase tracking-[0.14em] text-orange-500">Kenapa Harus Join?</p>
+            <ul class="mt-4 space-y-4 text-slate-700">
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">✓</span>
+                <span>Meningkatkan kemampuan menulis berita, artikel, dan caption informatif.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">✓</span>
+                <span>Terbiasa meliput kegiatan sekolah dengan standar kerja tim yang profesional.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">✓</span>
+                <span>Membangun portofolio karya nyata untuk lomba, kampus, dan masa depan.</span>
+              </li>
+            </ul>
           </div>
-          <div class="field">
-            <label>Category</label>
-            <select id="fCategory"><option value="">All</option></select>
-          </div>
-          <div class="field">
-            <label>Gender</label>
-            <select id="fGender"><option value="">All</option><option>men</option><option>women</option><option>kids</option><option>unisex</option></select>
-          </div>
-          <div class="field">
-            <label>Color</label>
-            <input id="fColor" placeholder="black" />
-          </div>
-          <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div><label>Min Price</label><input id="fMin" type="number" placeholder="0" /></div>
-            <div><label>Max Price</label><input id="fMax" type="number" placeholder="500000" /></div>
-          </div>
-          <div class="field">
-            <label>Sort</label>
-            <select id="fSort">
-              <option value="recommended">Recommended</option>
-              <option value="newest">Newest</option>
-              <option value="best">Best Selling</option>
-              <option value="priceLow">Price Low to High</option>
-              <option value="priceHigh">Price High to Low</option>
-              <option value="rating">Highest Rated</option>
-            </select>
-          </div>
-          <button id="applyFilter" style="width:100%">Apply Filter</button>
-        </aside>
-        <div>
-          <div class="grid cols-4" id="shopGrid"></div>
         </div>
       </div>
     </section>
 
-    <section>
-      <div class="section-head"><h2>Order Tracking (Demo)</h2></div>
-      <div class="panel">
-        <p class="muted" style="margin-top:0">Order #ORD-2409319 • Estimasi tiba 3 hari</p>
-        <div style="display:grid;gap:10px">
-          <div>✅ Order Placed</div>
-          <div>✅ Payment Confirmed</div>
-          <div>🕓 Order Processing</div>
-          <div>⬜ Packed</div>
-          <div>⬜ Shipped</div>
-          <div>⬜ Out for Delivery</div>
-          <div>⬜ Delivered</div>
+    <section id="karya" class="brand-gradient py-16 text-white md:py-20">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="max-w-2xl reveal">
+          <h3 class="text-3xl font-bold">Karya Kami</h3>
+          <p class="mt-3 text-white/90">Hasil liputan, dokumentasi visual, dan narasi yang kami produksi untuk menyampaikan cerita terbaik sekolah.</p>
+        </div>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <article class="reveal border-b border-white/35 pb-4">
+            <p class="text-xs uppercase tracking-[0.16em] text-white/80">Artikel</p>
+            <h4 class="mt-2 text-xl font-semibold">Berita Sekolah</h4>
+            <p class="mt-2 text-sm text-white/90">Peliputan agenda utama sekolah dengan struktur berita yang rapi dan faktual.</p>
+          </article>
+          <article class="reveal border-b border-white/35 pb-4">
+            <p class="text-xs uppercase tracking-[0.16em] text-white/80">Visual</p>
+            <h4 class="mt-2 text-xl font-semibold">Foto dan Video Event</h4>
+            <p class="mt-2 text-sm text-white/90">Dokumentasi momen penting dalam format visual yang modern dan informatif.</p>
+          </article>
+          <article class="reveal border-b border-white/35 pb-4">
+            <p class="text-xs uppercase tracking-[0.16em] text-white/80">Digital</p>
+            <h4 class="mt-2 text-xl font-semibold">Konten Media Sosial</h4>
+            <p class="mt-2 text-sm text-white/90">Distribusi informasi cepat melalui desain dan copywriting yang relevan untuk siswa.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="blog">
-      <div class="section-head"><h2>Blog & Berita</h2><span class="muted">15 artikel</span></div>
-      <div class="grid cols-3" id="blogGrid"></div>
-    </section>
+    <section id="angka" class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+      <div class="max-w-2xl reveal">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-orange-600">The Excellence of OST Jurnalistik</p>
+        <h3 class="mt-2 text-3xl font-bold text-slate-900">Pencapaian Dalam Angka</h3>
+        <p class="mt-3 text-slate-600">Terinspirasi dari layout sekolah modern: angka ditampilkan jelas agar progres tim jurnalistik mudah terlihat.</p>
+      </div>
 
-    <section>
-      <div class="section-head"><h2>Newsletter</h2></div>
-      <div class="panel" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
-        <div>
-          <h3 style="margin:0 0 6px">Get 10% OFF your first order.</h3>
-          <p class="muted" style="margin:0">Dapatkan update promo dan koleksi terbaru.</p>
+      <div class="mt-10 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+        <div class="reveal border-l-4 border-orange-500 pl-4">
+          <p class="text-4xl font-black text-slate-900">120+</p>
+          <p class="mt-2 text-sm text-slate-600">Artikel dan berita sekolah terbit setiap tahun ajaran.</p>
         </div>
-        <div style="display:flex;gap:8px;min-width:min(460px,100%)">
-          <input placeholder="Your email address" />
-          <button>Subscribe</button>
+        <div class="reveal border-l-4 border-orange-500 pl-4">
+          <p class="text-4xl font-black text-slate-900">35+</p>
+          <p class="mt-2 text-sm text-slate-600">Anggota aktif lintas divisi: reporter, editor, foto, dan desain.</p>
+        </div>
+        <div class="reveal border-l-4 border-orange-500 pl-4">
+          <p class="text-4xl font-black text-slate-900">18+</p>
+          <p class="mt-2 text-sm text-slate-600">Liputan event sekolah, lomba, dan agenda kolaborasi tiap semester.</p>
         </div>
       </div>
+    </section>
+
+    <section id="program" class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+      <div class="max-w-2xl reveal">
+        <h3 class="text-3xl font-bold text-slate-900">Program Menarik Jurnalistik</h3>
+        <p class="mt-3 text-slate-600">Kegiatan rutin yang dirancang agar anggota terus berkembang dari latihan sampai publikasi.</p>
+      </div>
+
+      <div class="mt-10 grid gap-10 md:grid-cols-3">
+        <div class="reveal">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-orange-600">01</p>
+          <h4 class="mt-2 text-xl font-semibold text-slate-900">Kelas Menulis</h4>
+          <p class="mt-2 text-slate-600">Belajar struktur berita, teknik wawancara, dan penulisan yang enak dibaca.</p>
+        </div>
+        <div class="reveal">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-orange-600">02</p>
+          <h4 class="mt-2 text-xl font-semibold text-slate-900">Simulasi Liputan</h4>
+          <p class="mt-2 text-slate-600">Praktik langsung peliputan event dengan pembagian peran reporter dan editor.</p>
+        </div>
+        <div class="reveal">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-orange-600">03</p>
+          <h4 class="mt-2 text-xl font-semibold text-slate-900">Publishing Day</h4>
+          <p class="mt-2 text-slate-600">Hari publikasi karya di mading, web, dan media sosial untuk membangun konsistensi.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="emagazine" class="bg-slate-950 py-16 text-white md:py-20">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="max-w-3xl reveal">
+          <h3 class="text-3xl font-bold">Baca E-Magazine Spemdalas</h3>
+          <p class="mt-3 text-slate-300">E-Magazine ini adalah karya OST Jurnalistik yang berisi liputan, opini, dan dokumentasi cerita sekolah dalam format digital interaktif.</p>
+          <button id="open-edition-modal" type="button" class="mt-6 inline-flex rounded-full bg-orange-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-600">
+            Baca Sekarang
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="flyer" class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+      <div class="max-w-2xl">
+        <h3 class="text-3xl font-bold text-slate-900">Flyer Digital OST Jurnalistik</h3>
+        <p class="mt-3 text-slate-600">Area ini disiapkan untuk flyer promosi berukuran A4. Gambar akan berganti otomatis setiap 4 detik.</p>
+      </div>
+
+      <div class="mt-8 flex justify-center">
+        <div id="flyer-slider" class="relative w-full max-w-[420px] overflow-hidden rounded-2xl border border-slate-200 bg-slate-100" style="aspect-ratio: 210 / 297;" data-slider>
+          <img src="flyer.png" alt="Flyer OST Jurnalistik 1" class="slider-image active absolute inset-0 h-full w-full object-contain" />
+          <img src="flyer2.png" alt="Flyer OST Jurnalistik 2" class="slider-image absolute inset-0 h-full w-full object-contain" />
+        </div>
+      </div>
+
+      <div class="mt-5 flex justify-center gap-2" data-dots-for="flyer-slider"></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div><h4>SHOP</h4><a href="#men">Men</a><a href="#women">Women</a><a href="#kids">Kids</a><a href="#new">New Arrivals</a><a href="#best">Best Sellers</a><a href="#sale">Sale</a></div>
-      <div><h4>HELP</h4><a href="#">Contact Us</a><a href="#">FAQ</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Size Guide</a></div>
-      <div><h4>ABOUT</h4><a href="#">About Us</a><a href="#">Our Story</a><a href="#">Careers</a></div>
-      <div><h4>FOLLOW</h4><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">YouTube</a></div>
-      <div><h4>LEGAL</h4><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div>
+  <footer id="kontak" class="bg-slate-900 text-white">
+    <div class="mx-auto max-w-6xl px-4 py-10">
+      <div class="flex flex-col gap-8 border-b border-white/15 pb-8 md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center gap-3">
+          <img src="namalogo.png" alt="Logo OST Jurnalistik" class="h-11 w-11 object-contain" />
+          <div>
+            <p class="text-base font-semibold">OST Jurnalistik</p>
+            <p class="text-sm text-slate-300">Slogan: Menulis Fakta, Menyuarakan Makna.</p>
+          </div>
+        </div>
+
+        <a href="https://www.instagram.com/dalas_journalism_club" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-orange-400/70 px-4 py-2 text-sm font-semibold text-orange-300 transition hover:bg-orange-500 hover:text-white">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.2" cy="6.8" r="1"></circle>
+          </svg>
+          Instagram Club
+        </a>
+      </div>
+
+      <div class="mt-5 flex flex-col gap-3 text-xs text-slate-400 md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center gap-2">
+          <img src="namalogo.png" alt="Logo kecil OST Jurnalistik" class="h-5 w-5 object-contain" />
+          <p>Copyright © <span id="year"></span> OST Jurnalistik. All rights reserved.</p>
+        </div>
+        <p>Ekstrakurikuler Jurnalistik Sekolah | Modern and Professional</p>
+      </div>
     </div>
-    <div class="copyright">© 2026 Awong Suites. All rights reserved.</div>
   </footer>
 
-  <div class="drawer" id="cartDrawer">
-    <div class="drawer-box">
-      <div style="display:flex;justify-content:space-between;align-items:center"><h3>Shopping Cart</h3><button class="btn-outline" onclick="toggleDrawer('cartDrawer', false)">Close</button></div>
-      <div id="cartItems" style="display:grid;gap:10px"></div>
-      <div class="panel" style="margin-top:10px">
-        <div style="display:flex;justify-content:space-between"><span>Subtotal</span><b id="cartSubtotal">Rp0</b></div>
-        <div style="display:flex;justify-content:space-between"><span>Shipping</span><span>Rp20.000</span></div>
-        <div style="display:flex;justify-content:space-between"><span>Tax</span><span>11%</span></div>
-        <hr style="border:0;border-top:1px solid var(--line);margin:10px 0"/>
-        <div style="display:flex;justify-content:space-between"><b>Total</b><b id="cartTotal">Rp0</b></div>
-        <button style="margin-top:10px;width:100%" onclick="checkout()">Proceed to Checkout</button>
+  <div id="edition-modal" class="fixed inset-0 z-40 hidden items-center justify-center bg-black/65 px-4">
+    <div class="w-full max-w-md rounded-2xl bg-white p-6 text-slate-800 shadow-2xl">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-orange-600">E-Magazine</p>
+          <h4 class="mt-1 text-xl font-bold">Pilih Edisi</h4>
+        </div>
+        <button id="close-edition-modal" type="button" class="rounded-full border border-slate-300 px-3 py-1 text-sm font-semibold text-slate-600 transition hover:bg-slate-100">Tutup</button>
       </div>
+
+      <button id="open-edition-1" type="button" class="mt-5 w-full rounded-xl border border-orange-200 bg-orange-50 px-4 py-3 text-left transition hover:bg-orange-100">
+        <p class="text-sm font-semibold text-slate-900">Edisi 1</p>
+        <p class="mt-1 text-xs text-slate-600">Mengenang Jasa Penjaga Bangsa</p>
+      </button>
     </div>
   </div>
 
-  <div class="drawer" id="wishDrawer">
-    <div class="drawer-box">
-      <div style="display:flex;justify-content:space-between;align-items:center"><h3>Wishlist</h3><button class="btn-outline" onclick="toggleDrawer('wishDrawer', false)">Close</button></div>
-      <div id="wishItems" style="display:grid;gap:10px"></div>
-    </div>
-  </div>
-
-  <button class="ai-float" id="openAi">✦</button>
-  <div class="ai-panel" id="aiPanel">
-    <div class="ai-box">
-      <div class="ai-head">StyleAI Assistant <button class="btn-outline" onclick="toggleAI(false)">Close</button></div>
-      <div class="ai-msgs" id="aiMsgs"></div>
-      <div style="padding:8px 10px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--line)">
-        <button class="btn-outline" onclick="askAI('Cari outfit casual warna hitam di bawah Rp500000')">outfit casual hitam</button>
-        <button class="btn-outline" onclick="askAI('Cari outfit untuk pesta')">outfit pesta</button>
-        <button class="btn-outline" onclick="askAI('Bantu pilih ukuran')">pilih ukuran</button>
-      </div>
-      <div class="ai-input">
-        <input id="aiInput" placeholder="Contoh: Carikan aku outfit casual warna hitam di bawah Rp500 ribu" />
-        <button onclick="askAI()">Send</button>
+  <div id="reader-view" class="fixed inset-0 z-50 hidden bg-black">
+    <button id="close-reader-view" type="button" class="absolute left-3 top-3 z-10 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-slate-800 transition hover:bg-white">
+      Kembali
+    </button>
+    <div class="h-full w-full px-2 pb-2 pt-12">
+      <div style="position:relative;width:100%;height:100%;">
+        <iframe style="position:absolute;border:none;width:100%;height:100%;left:0;top:0;" src="https://online.fliphtml5.com/kemkv/Mengenang-Jasa-Penjaga-Bangsa/" title="Fekri Magazine - Mengenang Jasa Penjaga Bangsa" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
       </div>
     </div>
   </div>
 
   <script>
-    const categories = ["Men","Women","Kids","Atasan","Bawahan","Dress","Outerwear","Jaket","Kaos","Kemeja","Celana","Aksesoris"];
+    function createDots(sliderId, total) {
+      const dotsContainer = document.querySelector(`[data-dots-for="${sliderId}"]`);
+      if (!dotsContainer) return [];
 
-    const products = [
-      {id:1,name:"Oversized Essential Tee",category:"Kaos",gender:"unisex",price:149000,sale:129000,rating:4.8,reviews:187,stock:35,colors:["Black","White","Stone"],badge:["NEW","BEST"],img1:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1618354691551-44de113f0164?auto=format&fit=crop&w=900&q=80"},
-      {id:2,name:"Premium Linen Shirt",category:"Kemeja",gender:"men",price:299000,sale:269000,rating:4.7,reviews:94,stock:22,colors:["Ivory","Sage","Navy"],badge:["NEW"],img1:"https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=900&q=80"},
-      {id:3,name:"Relaxed Straight Pants",category:"Celana",gender:"unisex",price:279000,sale:null,rating:4.6,reviews:75,stock:12,colors:["Black","Khaki"],badge:["BEST"],img1:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=900&q=80"},
-      {id:4,name:"Minimalist Overshirt",category:"Outerwear",gender:"men",price:349000,sale:null,rating:4.5,reviews:48,stock:8,colors:["Coal","Olive"],badge:["LIMITED"],img1:"https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1618886614638-80e3c103d31a?auto=format&fit=crop&w=900&q=80"},
-      {id:5,name:"Everyday Hoodie",category:"Atasan",gender:"unisex",price:329000,sale:289000,rating:4.9,reviews:220,stock:14,colors:["Black","Ash","Mocha"],badge:["BEST"],img1:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1619603364904-c0498317e145?auto=format&fit=crop&w=900&q=80"},
-      {id:6,name:"Classic Denim Jacket",category:"Jaket",gender:"unisex",price:449000,sale:null,rating:4.7,reviews:131,stock:6,colors:["Denim Blue","Washed Black"],badge:["LIMITED"],img1:"https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=80"},
-      {id:7,name:"Tailored Wide Leg Trousers",category:"Bawahan",gender:"women",price:389000,sale:null,rating:4.8,reviews:66,stock:18,colors:["Charcoal","Sand"],badge:["NEW"],img1:"https://images.unsplash.com/photo-1506629905607-bb5f5f4f6b7f?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80"},
-      {id:8,name:"Flowy Midi Dress",category:"Dress",gender:"women",price:429000,sale:369000,rating:4.9,reviews:57,stock:9,colors:["Emerald","Black"],badge:["SALE"],img1:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80"},
-      {id:9,name:"Soft Knit Cardigan",category:"Outerwear",gender:"women",price:359000,sale:null,rating:4.6,reviews:39,stock:16,colors:["Cream","Dusty Pink"],badge:[],img1:"https://images.unsplash.com/photo-1525457136159-8878648a7ad0?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80"},
-      {id:10,name:"Cargo Utility Pants",category:"Celana",gender:"men",price:319000,sale:null,rating:4.5,reviews:81,stock:20,colors:["Army","Black"],badge:[],img1:"https://images.unsplash.com/photo-1475180098004-ca77a66827be?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1503342394128-c104d54dba01?auto=format&fit=crop&w=900&q=80"},
-      {id:11,name:"Kids Graphic Tee",category:"Kids",gender:"kids",price:119000,sale:null,rating:4.8,reviews:43,stock:26,colors:["Sky","White"],badge:["NEW"],img1:"https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&w=900&q=80"},
-      {id:12,name:"Kids Chino Shorts",category:"Kids",gender:"kids",price:139000,sale:null,rating:4.4,reviews:23,stock:19,colors:["Khaki","Navy"],badge:[],img1:"https://images.unsplash.com/photo-1517832207067-4db24a2ae47c?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"},
-      {id:13,name:"Structured Blazer",category:"Outerwear",gender:"women",price:599000,sale:519000,rating:4.9,reviews:77,stock:7,colors:["Black","Slate"],badge:["LIMITED","SALE"],img1:"https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80"},
-      {id:14,name:"Monochrome Polo Shirt",category:"Atasan",gender:"men",price:249000,sale:null,rating:4.3,reviews:33,stock:13,colors:["Black","White"],badge:[],img1:"https://images.unsplash.com/photo-1593032465171-8bd2f6e6d390?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?auto=format&fit=crop&w=900&q=80"},
-      {id:15,name:"Pleated Skirt",category:"Bawahan",gender:"women",price:289000,sale:null,rating:4.5,reviews:41,stock:11,colors:["Mocha","Ivory"],badge:[],img1:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80"},
-      {id:16,name:"Active Zip Jacket",category:"Jaket",gender:"unisex",price:399000,sale:null,rating:4.6,reviews:59,stock:15,colors:["Black","Neon Lime"],badge:["NEW"],img1:"https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80"},
-      {id:17,name:"Canvas Tote Premium",category:"Aksesoris",gender:"unisex",price:179000,sale:null,rating:4.8,reviews:102,stock:27,colors:["Natural","Black"],badge:["BEST"],img1:"https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=900&q=80"},
-      {id:18,name:"Leather Minimal Belt",category:"Aksesoris",gender:"unisex",price:219000,sale:null,rating:4.4,reviews:28,stock:10,colors:["Black","Brown"],badge:[],img1:"https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=80"},
-      {id:19,name:"Weekend Co-ord Set",category:"Women",gender:"women",price:499000,sale:439000,rating:4.9,reviews:52,stock:5,colors:["Beige","Olive"],badge:["LIMITED","SALE"],img1:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=900&q=80"},
-      {id:20,name:"Women Ribbed Basic Top",category:"Women",gender:"women",price:199000,sale:null,rating:4.6,reviews:88,stock:29,colors:["White","Black","Mauve"],badge:["NEW"],img1:"https://images.unsplash.com/photo-1465406325903-9d93ee82f613?auto=format&fit=crop&w=900&q=80",img2:"https://images.unsplash.com/photo-1525457136159-8878648a7ad0?auto=format&fit=crop&w=900&q=80"}
-    ];
-
-    const blogs = [
-      ["trend-monochrome-2026","Trend Monochrome 2026: Simpel, Tegas, dan Premium","Trend","https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80"],
-      ["cara-pilih-ukuran-online","Cara Memilih Ukuran Pakaian Online Agar Pas","Tips","https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1200&q=80"],
-      ["linen-vs-cotton","Linen vs Cotton: Mana yang Cocok untuk Iklim Tropis?","Material","https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=80"],
-      ["mix-and-match-office-look","5 Mix & Match Office Look yang Rapi Tanpa Kaku","Styling","https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=1200&q=80"],
-      ["fashion-weekly-recap-1","Fashion Weekly Recap: Siluet Longline Mendominasi","Berita","https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80"],
-      ["panduan-merawat-denim","Panduan Merawat Denim Agar Tahan Lama","Care","https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?auto=format&fit=crop&w=1200&q=80"],
-      ["warna-netral-untuk-capsule-wardrobe","Warna Netral Wajib untuk Capsule Wardrobe","Tips","https://images.unsplash.com/photo-1465406325903-9d93ee82f613?auto=format&fit=crop&w=1200&q=80"],
-      ["outfit-weekend-casual","Inspirasi Outfit Casual Weekend yang Tetap Polished","Styling","https://images.unsplash.com/photo-1503342394128-c104d54dba01?auto=format&fit=crop&w=1200&q=80"],
-      ["awong-styleai-update","StyleAI Update: Rekomendasi Outfit Kini Lebih Personal","Produk","https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=1200&q=80"],
-      ["streetwear-clean-look","Streetwear dengan Sentuhan Clean Look","Trend","https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1200&q=80"],
-      ["editor-choice-february","Editor’s Choice Februari: 4 Item yang Paling Versatile","Editorial","https://images.unsplash.com/photo-1525457136159-8878648a7ad0?auto=format&fit=crop&w=1200&q=80"],
-      ["fashion-news-ramadan-prep","Fashion News: Persiapan Koleksi Ramadan Minimal Luxe","Berita","https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=1200&q=80"],
-      ["cara-membaca-label-perawatan","Cara Membaca Label Perawatan Pakaian dengan Benar","Care","https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80"],
-      ["guide-belanja-promo","Guide Belanja Saat Promo: Prioritas Item yang Tepat","Tips","https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=1200&q=80"],
-      ["fashion-news-community","Awong Community: Style Session Pertama Resmi Dibuka","Berita","https://images.unsplash.com/photo-1618354691551-44de113f0164?auto=format&fit=crop&w=1200&q=80"]
-    ];
-
-    const currency = (n)=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
-    const state = { cart: [], wishlist: [], filtered:[...products] };
-
-    function badgeHTML(b){
-      return b.map(x=>{
-        const c = x==='SALE'?'sale':x==='BEST'?'best':x==='LIMITED'?'limited':'';
-        return `<span class="badge ${c}">${x==='BEST'?'BEST SELLER':x}</span>`;
-      }).join('');
+      dotsContainer.innerHTML = "";
+      const dots = [];
+      for (let i = 0; i < total; i += 1) {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "dot h-2 w-2 rounded-full bg-white/60 transition-all duration-300";
+        dot.setAttribute("aria-label", `Pindah ke slide ${i + 1}`);
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+      }
+      return dots;
     }
 
-    function productCard(p){
-      const active = p.sale ?? p.price;
-      return `<article class="product">
-        <div class="p-media">
-          <img src="${p.img1}" alt="${p.name}" loading="lazy" />
-          <img src="${p.img2||p.img1}" alt="${p.name}" loading="lazy" />
-          <div class="badge-wrap">${badgeHTML(p.badge)}</div>
-          <div class="wish"><button aria-label="wishlist" onclick="toggleWishlist(${p.id})">♡</button></div>
-        </div>
-        <div class="p-body">
-          <p class="p-name">${p.name}</p>
-          <div class="p-meta">${p.category} • ★ ${p.rating} (${p.reviews})</div>
-          <div class="price"><b>${currency(active)}</b>${p.sale?`<span class="old">${currency(p.price)}</span><span style="font-size:12px;color:#d72a2a">-${Math.round((p.price-p.sale)/p.price*100)}%</span>`:''}</div>
-          <div class="swatches">${p.colors.map(c=>`<span>${c}</span>`).join('')}</div>
-          <div class="p-meta" style="margin-top:6px">${p.stock<=0?'Sold Out':p.stock<=3?`Only ${p.stock} left`:'In stock'}</div>
-          <div class="p-actions">
-            <button class="btn-outline" onclick="quickView(${p.id})">Quick View</button>
-            <button onclick="addToCart(${p.id})">Quick Add</button>
-          </div>
-        </div>
-      </article>`;
-    }
+    function initSlider(sliderElement) {
+      const slides = Array.from(sliderElement.querySelectorAll(".slider-image"));
+      if (slides.length <= 1) return;
 
-    function renderCollections(){
-      document.getElementById('newGrid').innerHTML = products.filter(p=>p.badge.includes('NEW')).slice(0,8).map(productCard).join('');
-      document.getElementById('bestGrid').innerHTML = products.filter(p=>p.badge.includes('BEST')).slice(0,8).map(productCard).join('');
-    }
+      const sliderId = sliderElement.id;
+      const dots = createDots(sliderId, slides.length);
+      let current = 0;
 
-    function renderCategories(){
-      document.getElementById('categoryChips').innerHTML = categories.map(c=>`<a class="chip" href="#shop" onclick="setCategory('${c}')">${c}</a>`).join('');
-      const sel = document.getElementById('fCategory');
-      sel.innerHTML = '<option value="">All</option>' + categories.map(c=>`<option>${c}</option>`).join('');
-    }
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === index);
+        });
 
-    function renderShop(items=state.filtered){
-      document.getElementById('shopGrid').innerHTML = items.map(productCard).join('');
-      document.getElementById('resultCount').textContent = `${items.length} produk ditemukan`;
-    }
-
-    function applyFilter(){
-      const q = document.getElementById('fQuery').value.toLowerCase().trim();
-      const category = document.getElementById('fCategory').value;
-      const gender = document.getElementById('fGender').value;
-      const color = document.getElementById('fColor').value.toLowerCase().trim();
-      const min = +document.getElementById('fMin').value || 0;
-      const max = +document.getElementById('fMax').value || Infinity;
-      const sort = document.getElementById('fSort').value;
-
-      let items = products.filter(p=>{
-        const price = p.sale ?? p.price;
-        return (!q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))
-          && (!category || p.category===category)
-          && (!gender || p.gender===gender)
-          && (!color || p.colors.join(' ').toLowerCase().includes(color))
-          && price>=min && price<=max;
-      });
-
-      if(sort==='priceLow') items.sort((a,b)=>(a.sale??a.price)-(b.sale??b.price));
-      if(sort==='priceHigh') items.sort((a,b)=>(b.sale??b.price)-(a.sale??a.price));
-      if(sort==='rating') items.sort((a,b)=>b.rating-a.rating);
-      if(sort==='best') items.sort((a,b)=>b.reviews-a.reviews);
-      if(sort==='newest') items.sort((a,b)=>b.id-a.id);
-
-      state.filtered = items;
-      renderShop();
-    }
-
-    function setCategory(c){
-      document.getElementById('fCategory').value = c;
-      applyFilter();
-    }
-
-    function addToCart(id){
-      const p = products.find(x=>x.id===id); if(!p) return;
-      const row = state.cart.find(x=>x.id===id);
-      if(row) row.qty += 1; else state.cart.push({id, qty:1, size:'M', color:p.colors[0]});
-      renderCart();
-      toggleDrawer('cartDrawer', true);
-    }
-
-    function toggleWishlist(id){
-      const i = state.wishlist.indexOf(id);
-      if(i>-1) state.wishlist.splice(i,1); else state.wishlist.push(id);
-      renderWishlist();
-    }
-
-    function renderCart(){
-      const box = document.getElementById('cartItems');
-      if(!state.cart.length){ box.innerHTML = '<div class="panel">Keranjang masih kosong.</div>'; document.getElementById('cartSubtotal').textContent='Rp0'; document.getElementById('cartTotal').textContent='Rp0'; return; }
-      box.innerHTML = state.cart.map(ci=>{
-        const p = products.find(x=>x.id===ci.id);
-        const price = p.sale ?? p.price;
-        return `<div class="panel" style="display:flex;gap:10px;align-items:center">
-          <img src="${p.img1}" alt="${p.name}" style="width:60px;height:76px;border-radius:10px;object-fit:cover" />
-          <div style="flex:1">
-            <div style="font-weight:700;font-size:14px">${p.name}</div>
-            <div class="muted" style="font-size:12px">${ci.color} • ${ci.size} • Qty ${ci.qty}</div>
-            <div style="font-size:13px">${currency(price)}</div>
-          </div>
-          <button class="btn-outline" onclick="removeCart(${ci.id})">Hapus</button>
-        </div>`;
-      }).join('');
-      const subtotal = state.cart.reduce((s,ci)=>{ const p=products.find(x=>x.id===ci.id); return s + (p.sale??p.price)*ci.qty; },0);
-      const total = subtotal + 20000 + Math.round(subtotal*.11);
-      document.getElementById('cartSubtotal').textContent = currency(subtotal);
-      document.getElementById('cartTotal').textContent = currency(total);
-    }
-
-    function removeCart(id){ state.cart = state.cart.filter(x=>x.id!==id); renderCart(); }
-    function renderWishlist(){
-      const box = document.getElementById('wishItems');
-      const rows = products.filter(p=>state.wishlist.includes(p.id));
-      if(!rows.length){ box.innerHTML = '<div class="panel">Wishlist kosong. Simpan produk favoritmu di sini.</div>'; return; }
-      box.innerHTML = rows.map(p=>`<div class="panel" style="display:flex;gap:10px;align-items:center">
-        <img src="${p.img1}" alt="${p.name}" style="width:60px;height:76px;border-radius:10px;object-fit:cover" />
-        <div style="flex:1"><b>${p.name}</b><div class="muted" style="font-size:12px">${p.stock<=2?`Stok tersisa ${p.stock}`:'Stok tersedia'}</div></div>
-        <button onclick="addToCart(${p.id})">Move to Cart</button>
-      </div>`).join('');
-    }
-
-    function quickView(id){
-      const p = products.find(x=>x.id===id);
-      alert(`${p.name}\nHarga: ${currency(p.sale ?? p.price)}\nRating: ${p.rating}/5\nMaterial premium, cocok untuk tampilan modern.`);
-    }
-
-    function checkout(){
-      if(!state.cart.length) return alert('Keranjang masih kosong.');
-      state.cart = [];
-      renderCart();
-      alert('Order Confirmed!\nOrder number: ORD-' + Math.floor(Math.random()*900000+100000) + '\nSilakan lanjut Track My Order.');
-    }
-
-    function toggleDrawer(id, open){
-      document.getElementById(id).classList.toggle('open', open);
-    }
-
-    document.getElementById('openCart').onclick = ()=>toggleDrawer('cartDrawer', true);
-    document.getElementById('openWishlist').onclick = ()=>toggleDrawer('wishDrawer', true);
-    document.getElementById('cartDrawer').onclick = (e)=>{ if(e.target.id==='cartDrawer') toggleDrawer('cartDrawer',false); };
-    document.getElementById('wishDrawer').onclick = (e)=>{ if(e.target.id==='wishDrawer') toggleDrawer('wishDrawer',false); };
-
-    document.getElementById('applyFilter').onclick = applyFilter;
-    document.getElementById('searchInput').addEventListener('keydown', (e)=>{
-      if(e.key==='Enter'){ e.preventDefault(); document.getElementById('fQuery').value=e.target.value; document.getElementById('shop').scrollIntoView(); applyFilter(); }
-    });
-
-    function renderBlog(){
-      document.getElementById('blogGrid').innerHTML = blogs.map(b=>`
-        <article class="blog-card">
-          <img src="${b[3]}" alt="${b[1]}" loading="lazy" />
-          <p class="muted" style="font-size:12px">${b[2]}</p>
-          <h3 style="font-size:16px;margin:6px 0">${b[1]}</h3>
-          <p class="muted" style="font-size:13px">Baca insight dan update terbaru fashion dari tim Awong Suites.</p>
-          <button class="btn-outline" onclick="alert('${b[1]}\n\nIni adalah demo single HTML. Untuk versi multi halaman, gunakan versi Next.js.')">Baca Berita</button>
-        </article>`).join('');
-    }
-
-    function toggleAI(open){ document.getElementById('aiPanel').classList.toggle('open', open); }
-    document.getElementById('openAi').onclick = ()=>toggleAI(true);
-    document.getElementById('aiPanel').onclick = (e)=>{ if(e.target.id==='aiPanel') toggleAI(false); };
-
-    function addMsg(text, who='bot', cards=[]){
-      const box = document.getElementById('aiMsgs');
-      const div = document.createElement('div');
-      div.className = 'msg ' + (who==='user'?'user':'bot');
-      div.innerHTML = `<div>${text}</div>` + (cards.length?`<div style='margin-top:8px;display:grid;gap:6px'>${cards.map(c=>`<div style='display:flex;gap:7px;align-items:center;border:1px solid var(--line);padding:7px;border-radius:10px'><img src='${c.img1}' alt='${c.name}' style='width:42px;height:52px;object-fit:cover;border-radius:7px' /><div><div style='font-size:12px;font-weight:700'>${c.name}</div><div style='font-size:12px;color:var(--muted)'>${currency(c.sale??c.price)}</div></div></div>`).join('')}</div>`:'');
-      box.appendChild(div); box.scrollTop = box.scrollHeight;
-    }
-
-    function parseBudget(text){
-      const m = text.match(/(\d{3,7})/g);
-      if(!m) return null;
-      return Math.max(...m.map(x=>+x));
-    }
-
-    function askAI(seed){
-      const input = document.getElementById('aiInput');
-      const q = (seed || input.value).trim();
-      if(!q) return;
-      input.value='';
-      addMsg(q,'user');
-
-      const low = q.toLowerCase();
-      const budget = parseBudget(low);
-      const color = ['black','hitam','white','putih','navy','olive','beige','brown'].find(c=>low.includes(c));
-      const keyword = ['kaos','kemeja','jaket','celana','dress','hoodie','aksesoris','casual','pesta','liburan'].find(c=>low.includes(c));
-      let list = [...products].filter(p=>p.stock>0);
-
-      if(keyword && !['casual','pesta','liburan'].includes(keyword)) list = list.filter(p=>p.category.toLowerCase().includes(keyword));
-      if(color) list = list.filter(p=>p.colors.join(' ').toLowerCase().includes(color));
-      if(budget) list = list.filter(p=>(p.sale??p.price)<=budget);
-
-      list.sort((a,b)=>b.rating-a.rating);
-      const pick = list.slice(0,4);
-
-      if(!pick.length){
-        const alt = [...products].filter(p=>p.stock>0).sort((a,b)=>b.rating-a.rating).slice(0,3);
-        addMsg('Produk yang kamu cari belum tersedia. Ini alternatif terdekat dari katalog kami ✨','bot',alt);
-        return;
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === index);
+          dot.classList.toggle("bg-white", i === index);
+          dot.classList.toggle("bg-white/60", i !== index);
+        });
       }
 
-      const total = pick.reduce((s,p)=>s+(p.sale??p.price),0);
-      addMsg(`Siap! Aku menemukan ${pick.length} rekomendasi dari katalog Awong Suites. Estimasi total sekitar ${currency(total)}. Mau aku bantu pilih kombinasi outfit lengkap juga?`,'bot',pick);
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          current = index;
+          showSlide(current);
+        });
+      });
+
+      showSlide(current);
+
+      setInterval(() => {
+        current = (current + 1) % slides.length;
+        showSlide(current);
+      }, 4000);
     }
 
-    document.getElementById('aiInput').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); askAI(); }});
+    const menuButton = document.getElementById("menu-btn");
+    const menuPanel = document.getElementById("menu-panel");
+    const menuLinks = document.querySelectorAll(".menu-link");
+    const editionModal = document.getElementById("edition-modal");
+    const openEditionModal = document.getElementById("open-edition-modal");
+    const closeEditionModal = document.getElementById("close-edition-modal");
+    const openEdition1 = document.getElementById("open-edition-1");
+    const readerView = document.getElementById("reader-view");
+    const closeReaderView = document.getElementById("close-reader-view");
 
-    document.getElementById('themeBtn').onclick = ()=>{
-      document.body.classList.toggle('dark');
-      localStorage.setItem('awong-theme', document.body.classList.contains('dark')?'dark':'light');
-    };
-    if(localStorage.getItem('awong-theme')==='dark') document.body.classList.add('dark');
+    function toggleMenu() {
+      const isOpen = !menuPanel.classList.contains("hidden");
+      menuPanel.classList.toggle("hidden", isOpen);
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+    }
 
-    document.getElementById('openMobile').onclick = ()=> alert('Menu mobile: gunakan tombol navigasi di header dan scroll section (demo single HTML).');
+    menuButton.addEventListener("click", toggleMenu);
 
-    addMsg('Hai! Aku StyleAI 👋 Aku bisa membantu kamu menemukan outfit yang paling cocok. Mau cari outfit untuk acara apa hari ini?','bot');
-    renderCategories();
-    renderCollections();
-    renderShop(products);
-    renderBlog();
-    renderCart();
-    renderWishlist();
+    document.addEventListener("click", (event) => {
+      if (!menuPanel.contains(event.target) && !menuButton.contains(event.target)) {
+        menuPanel.classList.add("hidden");
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        menuPanel.classList.add("hidden");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    function openModal(modalElement) {
+      modalElement.classList.remove("hidden");
+      modalElement.classList.add("flex");
+    }
+
+    function closeModal(modalElement) {
+      modalElement.classList.add("hidden");
+      modalElement.classList.remove("flex");
+    }
+
+    openEditionModal.addEventListener("click", () => openModal(editionModal));
+    closeEditionModal.addEventListener("click", () => closeModal(editionModal));
+
+    editionModal.addEventListener("click", (event) => {
+      if (event.target === editionModal) closeModal(editionModal);
+    });
+
+    openEdition1.addEventListener("click", () => {
+      closeModal(editionModal);
+      readerView.classList.remove("hidden");
+      document.body.classList.add("overflow-hidden");
+    });
+
+    closeReaderView.addEventListener("click", () => {
+      readerView.classList.add("hidden");
+      document.body.classList.remove("overflow-hidden");
+      document.getElementById("emagazine").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.querySelectorAll("[data-slider]").forEach(initSlider);
   </script>
 </body>
 </html>
